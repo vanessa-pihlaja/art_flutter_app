@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  google_fonts: ^6.2.1
 
 dev_dependencies:
   flutter_test:
@@ -17,3 +18,26 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/gossip_girl_1.webp
+    - assets/images/gossip_girl_2.webp
+    - assets/images/gossip_girl_3.webp
+    - assets/images/gossip_girl_4.webp
+    - assets/images/gossip_girl_5.webp
+    - assets/images/female_artists_1.png
+    - assets/images/female_artists_2.png
+    - assets/images/female_artists_3.png
+    - assets/images/female_artists_4.png
+    - assets/images/female_artists_5.png
+    - assets/images/female_artists_6.png
+    - assets/images/female_artists_7.png
+    - assets/images/female_artists_8.png
+    - assets/images/female_artists_9.png
+    - assets/images/female_artists_10.png
+    - assets/images/exhibition1.jpg
+    - assets/images/exhibition2.jpg
+    - assets/images/exhibition3.jpg
+    - assets/images/exhibition4.jpg
+        
+    
+  
