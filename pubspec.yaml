@@ -21,7 +21,6 @@ flutter:
   assets:
     - assets/images/gossip_girl_1.webp
     - assets/images/gossip_girl_2.webp
-    - assets/images/gossip_girl_3.webp
     - assets/images/gossip_girl_4.webp
     - assets/images/gossip_girl_5.webp
     - assets/images/female_artists_1.png
@@ -38,6 +37,11 @@ flutter:
     - assets/images/exhibition2.jpg
     - assets/images/exhibition3.jpg
     - assets/images/exhibition4.jpg
+    - assets/images/ateneum1.webp
+    - assets/images/kiasma1.webp
+    - assets/images/EMMA1.jpg
+    - assets/images/luonnontieteellinen1.jpg
+
         
     
   

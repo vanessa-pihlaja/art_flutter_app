@@ -15,25 +15,29 @@ class Article {
 class Exhibition {
   const Exhibition({
     required this.name,
-    required this.place,
+    required this.museum,
     required this.dates,
     required this.info,
     required this.imageUrl,
   });
 
   final String name;
-  final String place;
+  final String museum;
   final String dates;
   final String info;
   final String imageUrl;
 }
 
-class Place {
-  const Place({
+class Museum {
+  const Museum({
     required this.name,
+    required this.city,
     required this.address,
+    required this.imageUrl,
   });
 
   final String name;
+  final String city;
   final String address;
+  final String imageUrl;
 }

@@ -8,7 +8,7 @@ class DiscoveryScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text("Discovery")),
       body: const Center(
-        child: Text("Find amazing art here!"),
+        child: Text("Discovery page is under constuction."),
       ),
     );
   }
