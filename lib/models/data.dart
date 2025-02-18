@@ -87,66 +87,78 @@ final Article article_2 = Article(
     ]);
 
 
+List<Museum> getMuseumsAndExhibitions() {
+    var museum_1 = Museum(
+      name: "Ateneum",
+      city: "Helsinki",
+      address: "Kaivokatu 2",
+      imageUrl: "assets/images/ateneum1.webp",
+  );
 
-final Exhibition exhibition_1 = Exhibition(
-    name: "Gothic Modern",
-    museum: "Ateneum, Helsinki",
-    dates: "4.10.-26.1.2024.",
-    info: "This international exhibition presents modern art from the 19th and 20th centuries that is inspired by European medieval and Northern Renaissance art. The themes of the diverse exhibition include death and rituals, but also sexuality and enlightenment.",
-    imageUrl: "assets/images/exhibition1.jpg",
-);
+  var museum_2 = Museum(
+      name: "Kiasma",
+      city: "Helsinki",
+      address: "Mannerheiminaukio 2",
+      imageUrl: "assets/images/kiasma1.webp",
+  );
 
-final Exhibition exhibition_2 = Exhibition(
-    name: "Milky Way Tour",
-    museum: "Kiasma, Helsinki",
-    dates: "15.11.2024.-23.3.2025.",
-    info: "The infinite expanse of space and the mystery of human existence on our planet have intrigued artists throughout the ages. This exhibition invites visitors to explore humanity’s relationship with the environment, other species, and technology. What is our role and future in the universe?",
-    imageUrl: "assets/images/exhibition2.jpg",
-);
+  var museum_3 = Museum(
+      name: "EMMA",
+      city: "Espoo",
+      address: "Ahertajantie 5",
+      imageUrl: "assets/images/EMMA1.jpg",
+  );
 
-final Exhibition exhibition_3 = Exhibition(
-    name: "Eero Järnefelt",
-    museum: "Ateneum, Helsinki",
-    dates: "5.4.-25.8.2024.",
-    info: "This exhibition presents the extensive oeuvre of Eero Järnefelt (1863–1937), who grew up in a cultured, cosmopolitan family, and it explores the artist’s significance for Finnish art and Finnishness. Järnefelt’s varied nature depictions raise the question of whether the natural environments captured by the artist in the 19th and 20th centuries still exist.",
-    imageUrl: "assets/images/exhibition3.jpg",
-);
+  var museum_4 = Museum(
+      name: "Luonnontieellinen museo",
+      city: "Helsinki",
+      address: "Pohjoinen Rautatiekatu 13",
+      imageUrl: "assets/images/luonnontieteellinen1.jpg",
+  );
 
-final Exhibition exhibition_4 = Exhibition(
-    name: "Tschabalala Self: Samasta korttelista",
-    museum: "EMMA, Espoo",
-    dates: "8.5.2024. - 4.5.2025.",
-    info: "Yhdysvaltalainen Tschabalala Self (s. 1990) sanoo olevansa ennen kaikkea taidemaalari, vaikka hänen teoksiaan voi myös kuvailla kollaaseiksi. Hän maalaa erilaisilla pigmenteillä ja yhdistää maalauksiinsa kankaita, lankoja ja erilaisia painettuja materiaaleja. Self käyttää kierrätysmateriaaleja ja piirtää teostensa yksityiskohtia myös ompelukoneella. Isot ihmisen kokoiset veistokset ovat kuin kolmiulotteisia maalauksia. Ne muodostavat tarinallisia kokonaisuuksia seinillä olevien teosten kanssa.",
-    imageUrl: "assets/images/exhibition4.jpg",
-);
+  var exhibition_1 = Exhibition(
+      name: "Gothic Modern",
+      museum: museum_1,
+      dates: "4.10.-26.1.2024.",
+      info: "This international exhibition presents modern art from the 19th and 20th centuries that is inspired by European medieval and Northern Renaissance art. The themes of the diverse exhibition include death and rituals, but also sexuality and enlightenment.",
+      imageUrl: "assets/images/exhibition1.jpg",
+  );
+
+  var exhibition_2 = Exhibition(
+      name: "Milky Way Tour",
+      museum: museum_2,
+      dates: "15.11.2024.-23.3.2025.",
+      info: "The infinite expanse of space and the mystery of human existence on our planet have intrigued artists throughout the ages. This exhibition invites visitors to explore humanity’s relationship with the environment, other species, and technology. What is our role and future in the universe?",
+      imageUrl: "assets/images/exhibition2.jpg",
+  );
+
+  var exhibition_3 = Exhibition(
+      name: "Eero Järnefelt",
+      museum: museum_1,
+      dates: "5.4.-25.8.2024.",
+      info: "This exhibition presents the extensive oeuvre of Eero Järnefelt (1863–1937), who grew up in a cultured, cosmopolitan family, and it explores the artist’s significance for Finnish art and Finnishness. Järnefelt’s varied nature depictions raise the question of whether the natural environments captured by the artist in the 19th and 20th centuries still exist.",
+      imageUrl: "assets/images/exhibition3.jpg",
+  );
+
+  var exhibition_4 = Exhibition(
+      name: "Tschabalala Self: Samasta korttelista",
+      museum: museum_3,
+      dates: "8.5.2024. - 4.5.2025.",
+      info: "Yhdysvaltalainen Tschabalala Self (s. 1990) sanoo olevansa ennen kaikkea taidemaalari, vaikka hänen teoksiaan voi myös kuvailla kollaaseiksi. Hän maalaa erilaisilla pigmenteillä ja yhdistää maalauksiinsa kankaita, lankoja ja erilaisia painettuja materiaaleja. Self käyttää kierrätysmateriaaleja ja piirtää teostensa yksityiskohtia myös ompelukoneella. Isot ihmisen kokoiset veistokset ovat kuin kolmiulotteisia maalauksia. Ne muodostavat tarinallisia kokonaisuuksia seinillä olevien teosten kanssa.",
+      imageUrl: "assets/images/exhibition4.jpg",
+  );
+
+  museum_1.exhibitions.addAll([exhibition_1, exhibition_3]);
+  museum_2.exhibitions.addAll([exhibition_2]);
+  museum_3.exhibitions.addAll([exhibition_4]);
+
+  return [museum_1, museum_2, museum_3, museum_4];
+}
 
 
 
-final Museum museum_1 = Museum(
-    name: "Ateneum",
-    city: "Helsinki",
-    address: "Kaivokatu 2",
-    imageUrl: "assets/images/ateneum1.webp",
-);
 
-final Museum museum_2 = Museum(
-    name: "Kiasma",
-    city: "Helsinki",
-    address: "Mannerheiminaukio 2",
-    imageUrl: "assets/images/kiasma1.webp",
-);
 
-final Museum museum_3 = Museum(
-    name: "EMMA",
-    city: "Espoo",
-    address: "Ahertajantie 5",
-    imageUrl: "assets/images/EMMA1.jpg",
-);
 
-final Museum museum_4 = Museum(
-    name: "Luonnontieellinen museo",
-    city: "Helsinki",
-    address: "Pohjoinen Rautatiekatu 13",
-    imageUrl: "assets/images/luonnontieteellinen1.jpg",
-);
+
 

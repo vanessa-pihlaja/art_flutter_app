@@ -3,7 +3,8 @@ import '../models/models.dart';
 import '../models/data.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'article_screen.dart';
-
+import 'exhibition_screen.dart';
+import 'museum_screen.dart';
 
 
 class FeedScreen extends StatelessWidget {
@@ -11,6 +12,9 @@ class FeedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<Museum> museums = getMuseumsAndExhibitions();
+    final List<Exhibition> exhibitions = museums.expand((museum) => museum.exhibitions).toList();
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -43,7 +47,7 @@ class FeedScreen extends StatelessWidget {
               height:MediaQuery.of(context).size.height * 0.55,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: 4,
+                itemCount: exhibitions.length,
                 itemBuilder: (context, index) {
                   return ExhibitionCard(exhibition: exhibitions[index]);
                 },
@@ -71,7 +75,7 @@ class FeedScreen extends StatelessWidget {
                     height:MediaQuery.of(context).size.height * 0.55,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: 4,
+                      itemCount: museums.length,
                       itemBuilder: (context, index) {
                         return MuseumCard(museum: museums[index]);
                       },
@@ -207,13 +211,6 @@ class ArticleCard extends StatelessWidget {
 
 
 
-final List<Exhibition> exhibitions = [
-    exhibition_1,
-    exhibition_2,
-    exhibition_3,
-    exhibition_4,
-  ];
-
 class ExhibitionCard extends StatelessWidget {
   final Exhibition exhibition;
 
@@ -223,63 +220,75 @@ class ExhibitionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidht = MediaQuery.of(context).size.width;
-    final cardHeigth = screenHeight * 0.35;
+    final cardHeight = screenHeight * 0.35;
+
+    void _openExhibitionScreen() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ExhibitionScreen(exhibition: exhibition),
+        ),
+      );
+    }
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-      child: Container(
-        width: cardHeigth,
-        height: cardHeigth,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // image
-            ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: Image.asset(
-                exhibition.imageUrl,
-                width: screenWidht,
-                height: cardHeigth,
-                fit: BoxFit.cover,
+      child: GestureDetector(
+        onTap: _openExhibitionScreen,
+          child: Container(
+          width: cardHeight,
+          height: cardHeight,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // image
+              ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Image.asset(
+                  exhibition.imageUrl,
+                  width: screenWidht,
+                  height: cardHeight,
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
 
-            // exhibition details
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    exhibition.name, 
-                    style: GoogleFonts.playfairDisplay(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w700,
+              // exhibition details
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      exhibition.name, 
+                      style: GoogleFonts.playfairDisplay(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        exhibition.museum, 
-                        style: GoogleFonts.playfairDisplay(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w500,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          exhibition.museum.name, 
+                          style: GoogleFonts.playfairDisplay(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                      ),
-                      Text(
-                        exhibition.dates, 
-                        style: GoogleFonts.playfairDisplay(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w500,
+                        Text(
+                          exhibition.dates, 
+                          style: GoogleFonts.playfairDisplay(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -288,14 +297,6 @@ class ExhibitionCard extends StatelessWidget {
 
 
 
-
-
-final List<Museum> museums = [
-    museum_1,
-    museum_2,
-    museum_3,
-    museum_4,
-  ];
 
 class MuseumCard extends StatelessWidget {
   final Museum museum;
@@ -306,60 +307,72 @@ class MuseumCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidht = MediaQuery.of(context).size.width;
-    final cardHeigth = screenHeight * 0.35;
+    final cardHeight = screenHeight * 0.35;
+
+    void _openMuseumScreen() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MuseumScreen(museum: museum),
+        ),
+      );
+    }
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-      child: Container(
-        width: cardHeigth,
-        height: cardHeigth,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // image
-            ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: Image.asset(
-                museum.imageUrl,
-                width: screenWidht,
-                height: cardHeigth,
-                fit: BoxFit.cover,
+      child: GestureDetector(
+        onTap: _openMuseumScreen,
+        child: Container(
+          width: cardHeight,
+          height: cardHeight,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // image
+              ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Image.asset(
+                  museum.imageUrl,
+                  width: screenWidht,
+                  height: cardHeight,
+                  fit: BoxFit.cover,
+                ),
               ),
-            ),
 
-            // exhibition details
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    museum.name, 
-                    style: GoogleFonts.playfairDisplay(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w700,
+              // exhibition details
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      museum.name, 
+                      style: GoogleFonts.playfairDisplay(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
-                  ),
-                  Text(
-                    museum.address,
-                    style: GoogleFonts.playfairDisplay(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
+                    Text(
+                      museum.address,
+                      style: GoogleFonts.playfairDisplay(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                  Text(
-                    museum.city,
-                    style: GoogleFonts.playfairDisplay(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
+                    Text(
+                      museum.city,
+                      style: GoogleFonts.playfairDisplay(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
+      )
     );
   }
 }

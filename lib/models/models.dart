@@ -12,32 +12,35 @@ class Article {
   final List<String> imageUrl;
 }
 
-class Exhibition {
-  const Exhibition({
+class Museum {
+  Museum({
     required this.name,
-    required this.museum,
+    required this.city,
+    required this.address,
+    required this.imageUrl,
+    List<Exhibition>? exhibitions, 
+  }) : exhibitions = exhibitions ?? [];
+
+  final String name;
+  final String city;
+  final String address;
+  final String imageUrl;
+  List<Exhibition> exhibitions; 
+}
+
+class Exhibition {
+  Exhibition({ 
+    required this.name,
+    required this.museum, 
     required this.dates,
     required this.info,
     required this.imageUrl,
   });
 
   final String name;
-  final String museum;
+  Museum museum; 
   final String dates;
   final String info;
   final String imageUrl;
 }
 
-class Museum {
-  const Museum({
-    required this.name,
-    required this.city,
-    required this.address,
-    required this.imageUrl,
-  });
-
-  final String name;
-  final String city;
-  final String address;
-  final String imageUrl;
-}
