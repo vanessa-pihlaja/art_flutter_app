@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
 import 'screens/main_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:get/get.dart';
+import 'controllers/review_controller.dart';
+import 'models/review.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
 
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-void main() {
+  await Hive.initFlutter();
+
+  Hive.registerAdapter(ReviewAdapter());
+  await Hive.openBox<Review>("reviews");
+
+  Get.put(ReviewController());
+
   runApp(ArtApp());
 }
 
@@ -12,7 +25,7 @@ class ArtApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Art app',
       theme: ThemeData(
         textTheme: TextTheme(
@@ -32,3 +45,4 @@ class ArtApp extends StatelessWidget {
     );
   }
 }
+

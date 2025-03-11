@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'feed_screen.dart';
 import 'discovery_screen.dart';
 import 'profile_screen.dart';
+import 'package:hive/hive.dart';
+
+
+
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -18,6 +22,12 @@ class _MainScreenState extends State<MainScreen> {
     const DiscoveryScreen(),
     const ProfileScreen(),
   ];
+
+  @override
+  void dispose() {
+    Hive.close(); 
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
