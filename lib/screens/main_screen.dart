@@ -5,8 +5,6 @@ import 'profile_screen.dart';
 import 'package:hive/hive.dart';
 
 
-
-
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
@@ -31,6 +29,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: _screens[_currentIndex],
       bottomNavigationBar: NavigationBar(

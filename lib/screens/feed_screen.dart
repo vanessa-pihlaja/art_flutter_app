@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'article_screen.dart';
 import 'exhibition_screen.dart';
 import 'museum_screen.dart';
+import '../utils/screen_utils.dart';
 
 
 class FeedScreen extends StatelessWidget {
@@ -14,6 +15,7 @@ class FeedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<Museum> museums = getMuseumsAndExhibitions();
     final List<Exhibition> exhibitions = museums.expand((museum) => museum.exhibitions).toList();
+    final size = MediaQuery.of(context).size;
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -32,27 +34,43 @@ class FeedScreen extends StatelessWidget {
             ),
 
             Padding(
-              padding: const EdgeInsets.only(left: 16, top: 50, right: 20, bottom: 10),
+              padding: const EdgeInsets.only(left: 20, top: 50, right: 20, bottom: 10),
               child: Text(
                 "Exhibitions: ",
                 style: GoogleFonts.playfairDisplay(
-                        fontSize: 26,
+                        fontSize: ScreenSize.isDesktop(context)
+                          ? 30
+                          : 26,
                         fontWeight: FontWeight.w800,
                         color: Colors.black,
                       ),
               ),
             ),
 
-            SizedBox(
-              height:MediaQuery.of(context).size.height * 0.55,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: exhibitions.length,
-                itemBuilder: (context, index) {
-                  return ExhibitionCard(exhibition: exhibitions[index]);
-                },
+            Padding(
+              padding: ScreenSize.isMobile(context)
+                ? const EdgeInsets.only(left: 5, top: 0, right: 5, bottom: 0)
+                : ScreenSize.isLaptop(context)
+                    ? const EdgeInsets.only(left: 10, top: 5, right: 10, bottom: 0)
+                    : const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 0),
+              child: SizedBox(
+                height: ScreenSize.isMobile(context)
+                  ? MediaQuery.of(context).size.height * 0.55
+                  : ScreenSize.isTablet(context)
+                      ? MediaQuery.of(context).size.height * 0.55
+                      : ScreenSize.isLaptop(context)
+                          ? MediaQuery.of(context).size.height * 0.75
+                          : MediaQuery.of(context).size.height * 0.9,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: exhibitions.length,
+                  itemBuilder: (context, index) {
+                    return ExhibitionCard(exhibition: exhibitions[index]);
+                  },
+                ),
               ),
             ),
+            
 
             Container(
               color: Color(0xFFADD8E6),
@@ -60,25 +78,40 @@ class FeedScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 16, top: 30, right: 20, bottom: 10),
+                    padding: const EdgeInsets.only(left: 20, top: 30, right: 20, bottom: 10),
                     child: Text(
                       "Museums: ",
                       style: GoogleFonts.playfairDisplay(
-                              fontSize: 26,
+                              fontSize: ScreenSize.isDesktop(context)
+                                ? 30
+                                : 26,
                               fontWeight: FontWeight.w800,
                               color: Colors.black,
                             ),
                     ),
                   ),
 
-                  SizedBox(
-                    height:MediaQuery.of(context).size.height * 0.55,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: museums.length,
-                      itemBuilder: (context, index) {
-                        return MuseumCard(museum: museums[index]);
-                      },
+                  Padding(
+                    padding: ScreenSize.isMobile(context)
+                      ? const EdgeInsets.only(left: 5, top: 0, right: 5, bottom: 0)
+                      : ScreenSize.isLaptop(context)
+                          ? const EdgeInsets.only(left: 10, top: 5, right: 10, bottom: 0)
+                          : const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 0),
+                    child: SizedBox(
+                      height: ScreenSize.isMobile(context)
+                        ? MediaQuery.of(context).size.height * 0.55
+                        : ScreenSize.isTablet(context)
+                            ? MediaQuery.of(context).size.height * 0.55
+                            : ScreenSize.isLaptop(context)
+                                ? MediaQuery.of(context).size.height * 0.75
+                                : MediaQuery.of(context).size.height * 0.9,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: museums.length,
+                        itemBuilder: (context, index) {
+                          return MuseumCard(museum: museums[index]);
+                        },
+                      ),
                     ),
                   ),
                 ],
@@ -220,7 +253,13 @@ class ExhibitionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidht = MediaQuery.of(context).size.width;
-    final cardHeight = screenHeight * 0.35;
+    double cardHeight = screenHeight * 0.35;
+
+    if (ScreenSize.isLaptop(context)) {
+      cardHeight = screenHeight * 0.5;
+    } else if (ScreenSize.isDesktop(context)) {
+      cardHeight = screenHeight * 0.6;
+    }
 
     void _openExhibitionScreen() {
       Navigator.push(
@@ -261,7 +300,9 @@ class ExhibitionCard extends StatelessWidget {
                     Text(
                       exhibition.name, 
                       style: GoogleFonts.playfairDisplay(
-                        fontSize: 22,
+                        fontSize: ScreenSize.isDesktop(context)
+                          ? 28
+                          : 22,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -271,15 +312,19 @@ class ExhibitionCard extends StatelessWidget {
                         Text(
                           exhibition.museum.name, 
                           style: GoogleFonts.playfairDisplay(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500,
+                            fontSize: ScreenSize.isMobile(context)
+                              ? 15
+                              : 17,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                         Text(
                           exhibition.dates, 
                           style: GoogleFonts.playfairDisplay(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500,
+                            fontSize: ScreenSize.isMobile(context)
+                              ? 15
+                              : 17,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                       ],
@@ -307,7 +352,13 @@ class MuseumCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidht = MediaQuery.of(context).size.width;
-    final cardHeight = screenHeight * 0.35;
+    double cardHeight = screenHeight * 0.35;
+
+    if (ScreenSize.isLaptop(context)) {
+      cardHeight = screenHeight * 0.5;
+    } else if (ScreenSize.isDesktop(context)) {
+      cardHeight = screenHeight * 0.6;
+    }    
 
     void _openMuseumScreen() {
       Navigator.push(
@@ -348,22 +399,28 @@ class MuseumCard extends StatelessWidget {
                     Text(
                       museum.name, 
                       style: GoogleFonts.playfairDisplay(
-                        fontSize: 22,
+                        fontSize: ScreenSize.isDesktop(context)
+                          ? 25
+                          : 22,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
                     Text(
                       museum.address,
                       style: GoogleFonts.playfairDisplay(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
+                        fontSize: ScreenSize.isMobile(context)
+                          ? 15
+                          : 17,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                     Text(
                       museum.city,
                       style: GoogleFonts.playfairDisplay(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
+                        fontSize: ScreenSize.isMobile(context)
+                          ? 15
+                          : 17,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ],
