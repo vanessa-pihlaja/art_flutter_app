@@ -16,11 +16,15 @@ class Review {
   @HiveField(3)
   final int rating;
 
+  @HiveField(4)
+  final int likes;
+
   Review({
     required this.exhibitionName,
     required this.reviewerName,
     required this.comment,
     required this.rating,
+    required this.likes, 
   });
 
   Map toJson() => {
@@ -28,6 +32,7 @@ class Review {
         "reviewerName": reviewerName,
         "comment": comment,
         "rating": rating,
+        "likes": likes,
       };
 
   factory Review.fromJson(Map json) {
@@ -36,6 +41,23 @@ class Review {
       reviewerName: json['reviewerName'],
       comment: json['comment'],
       rating: json['rating'],
+      likes: json['likes'],
+    );
+  }
+
+  Review copyWith({
+    String? exhibitionName,
+    String? reviewerName,
+    String? comment,
+    int? rating,
+    int? likes,
+  }) {
+    return Review(
+      exhibitionName: exhibitionName ?? this.exhibitionName,
+      reviewerName: reviewerName ?? this.reviewerName,
+      comment: comment ?? this.comment,
+      rating: rating ?? this.rating,
+      likes: likes ?? this.likes,
     );
   }
 }

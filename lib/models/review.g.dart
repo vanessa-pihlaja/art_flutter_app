@@ -21,13 +21,14 @@ class ReviewAdapter extends TypeAdapter<Review> {
       reviewerName: fields[1] as String,
       comment: fields[2] as String,
       rating: fields[3] as int,
+      likes: fields[4] as int,
     );
   }
 
   @override
   void write(BinaryWriter writer, Review obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.exhibitionName)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class ReviewAdapter extends TypeAdapter<Review> {
       ..writeByte(2)
       ..write(obj.comment)
       ..writeByte(3)
-      ..write(obj.rating);
+      ..write(obj.rating)
+      ..writeByte(4)
+      ..write(obj.likes);
   }
 
   @override

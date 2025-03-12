@@ -26,11 +26,23 @@ class ReviewController extends GetxController {
       reviewerName: reviewerName,
       comment: comment,
       rating: rating,
+      likes: 0,
     );
 
     final key = DateTime.now().millisecondsSinceEpoch.toString(); 
     storage.put(key, newReview);
     // print("Review saved with key: $key");
     reviews.add(newReview);
+  }
+
+  void likeReview(Review review) {
+    final key = storage.keys.firstWhere((key) => storage.get(key) == review);
+    final updatedReview = review.copyWith(likes: review.likes + 1);
+    storage.put(key, updatedReview);
+
+    final index = reviews.indexWhere((r) => r == review);
+    if (index != -1) {
+      reviews[index] = updatedReview;
+    }
   }
 }

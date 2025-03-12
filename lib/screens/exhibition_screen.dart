@@ -184,9 +184,26 @@ class ExhibitionScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(review.comment, style: GoogleFonts.playfairDisplay(fontSize: 16)),
-                                Text("⭐ " * review.rating),
+                                Row(
+                                  children: [
+                                    Row(
+                                      children: List.generate(review.rating, (index) {
+                                        return Icon(Icons.star_rate, size: 20);
+                                      }),
+                                    ),
+                                    Spacer(),
+                                    IconButton(
+                                      icon: Icon(Icons.favorite_border),
+                                      onPressed: () {
+                                        reviewController.likeReview(review);
+                                      },
+                                    ),
+                                    Text(review.likes.toString()),
+                                  ],
+                                ),
                               ],
                             ),
+                            
                           ),
                         );
                       }).toList(),
@@ -237,7 +254,13 @@ class ExhibitionScreen extends StatelessWidget {
                         items: [1, 2, 3, 4, 5].map((int value) {
                           return DropdownMenuItem<int>(
                             value: value,
-                            child: Text("⭐ $value"),
+                            child: Row(
+                              children: [
+                                Icon(Icons.star_rate, size: 20),
+                                SizedBox(width: 4),
+                                Text("$value"),
+                              ],
+                            ),
                           );
                         }).toList(),
                         onChanged: (newValue) {
