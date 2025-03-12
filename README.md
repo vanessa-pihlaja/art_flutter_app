@@ -11,4 +11,5 @@ Features:
 
 This project was developed as part of a school assignemnt.
 
-View it live here:
+## View it live here:
+[vanessas-artapp.netlify.app](https://vanessas-artapp.netlify.app/)
