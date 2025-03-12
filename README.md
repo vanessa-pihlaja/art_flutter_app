@@ -1,4 +1,4 @@
-#Art app
+# Art app
 
 A simple art exploration app built with Flutter.
 
